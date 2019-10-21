@@ -27,6 +27,12 @@ router.put('/api/v1/:model/:id', handlePut);
 router.delete('/api/v1/:model/:id', handleDelete);
 
 // Route Handlers
+/**
+ * Returns all data from the model
+ * @param {*} request 
+ * @param {*} response 
+ * @param {*} next 
+ */
 function handleGetAll(request,response,next) {
   request.model.get()
     .then( data => {
@@ -39,12 +45,24 @@ function handleGetAll(request,response,next) {
     .catch( next );
 }
 
+/**
+ * Takes in an id param and returns the matching data from the model
+ * @param {*} request 
+ * @param {*} response 
+ * @param {*} next 
+ */
 function handleGetOne(request,response,next) {
   request.model.get(request.params.id)
     .then( result => response.status(200).json(result[0]) )
     .catch( next );
 }
 
+/**
+ * Creates a new 
+ * @param {*} request 
+ * @param {*} response 
+ * @param {*} next 
+ */
 function handlePost(request,response,next) {
   request.model.create(request.body)
     .then( result => response.status(200).json(result) )
